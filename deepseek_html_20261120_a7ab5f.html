@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Репетитор + ИИ-тренер</title>
+    <style>
+        /* Современный сброс стилей и базовые настройки */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Стили для заголовков и текста */
+        h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        strong {
+            color: #2b6cb0;
+        }
+
+        /* Карточки для блоков */
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        /* Блок с ценами */
+        .pricing {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+        .price-card {
+            flex: 1;
+            min-width: 280px;
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #3182ce;
+        }
+        .price-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #2b6cb0;
+        }
+        .price {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #2d3748;
+            margin: 10px 0;
+        }
+
+        /* Блок для видео (YouTube) */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Пропорции 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Кнопки и контакты */
+        .contacts {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .btn {
+            display: inline-block;
+            background: #3182ce;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+        .btn:hover {
+            background: #2b6cb0;
+        }
+        .btn-telegram {
+            background: #0088cc;
+        }
+        .btn-telegram:hover {
+            background: #006699;
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Репетитор + ИИ-тренер</h1>
+        <p style="text-align: center; font-size: 1.2rem; color: #4a5568;">Гарантированный результат по математике, химии, физике и информатике</p>
+
+        <div class="card">
+            <h2>Как это работает?</h2>
+            <p>Я занимаюсь со школьниками и студентами по следующим дисциплинам: <strong>математика, химия, физика, информатика</strong>.</p>
+            <p>У меня есть собственная современная методика: занятия проходят с использованием обучающей программы, разработанной с применением технологий <strong>ИИ (искусственного интеллекта)</strong>. Это индивидуальные занятия с гарантией результата — с какого бы уровня ни начинали.</p>
+            <p><strong>ИИ-помощник</strong> берёт на себя рутину: объясняет, повторяет, разбирает шаг за шагом — столько раз, сколько нужно. Преподаватель подключается в самые ответственные моменты и направляет, корректирует обучение.</p>
+        </div>
+
+        <div class="card">
+            <h2>Почему результат гарантирован?</h2>
+            <ul>
+                <li><strong>Безграничное терпение.</strong> ИИ-агент не устаёт и не раздражается от повторных вопросов. Одну и ту же тему он объяснит десятки раз — разными словами. В диалоге создаётся ощущение, что ты беседуешь с живым человеком.</li>
+                <li><strong>Подстраивается под ученика.</strong> Агент чувствует темп и особенности восприятия. Для него нет «сложных» и «безнадёжных» учеников. Одному нужно одно занятие, чтобы запомнить формулу, другому — три. Это вопрос времени, а не способностей.</li>
+                <li><strong>Учит думать, а не списывать.</strong> Агент не даёт готовый ответ — он разбирает ход решения и следит, чтобы ученик дошёл до него сам, с учётом его особенностей.</li>
+                <li><strong>Гибкий график.</strong> ИИ-тренер доступен круглосуточно: заниматься можно, когда есть вдохновение или срочно нужна помощь. На старте с учеником занимается Преподаватель онлайн/оффлайн — направляет и контролирует процесс. Дальше формат выбираете вы.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Что умеет агент?</h2>
+            <ul>
+                <li>Объясняет темы по химии, физике, информатике и другим предметам простым и понятным языком.</li>
+                <li>Помогает с домашними заданиями, разбирая ход решения.</li>
+                <li>Готовит к контрольным и экзаменам (ЦТ/ЦЭ): повторение, тренировочные вопросы, разбор ошибок.</li>
+                <li><strong>В конце каждого занятия</strong> — подробный отчёт: результаты урока, пробелы, которые нужно подтянуть, и выставленная оценка.</li>
+            </ul>
+        </div>
+
+        <!-- БЛОК ДЛЯ ВИДЕО -->
+        <div class="card">
+            <h2>Посмотрите, как это работает</h2>
+            <p>Вы можете посмотреть демонстрацию работы ИИ-тренера на видео:</p>
+            
+            <div class="video-container">
+                <!-- ВСТАВЬТЕ ССЫЛКУ НА ВАШЕ ВИДЕО YOUTUBE НИЖЕ -->
+                <!-- Замените ВАШ_КОД_ВИДЕО на реальный код из ссылки YouTube (например, dQw4w9WgXcQ) -->
+                <iframe src="https://www.youtube.com/embed/ВАШ_КОД_ВИДЕО" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #718096;">* Если видео не отображается, вы можете найти его на Куфаре по запросу: «Репетитор + (ИИ-тренер)».</p>
+        </div>
+
+        <div class="card">
+            <h2>Как начать?</h2>
+            <ol style="margin-left: 20px; margin-bottom: 20px; font-size: 1.1rem;">
+                <li style="margin-bottom: 10px;">Вы связываетесь со мной — обсуждаем класс, предметы и цели.</li>
+                <li style="margin-bottom: 10px;">Я настраиваю агента под конкретного ученика. Заниматься можно удалённо, в компьютерном классе или у вас дома.</li>
+                <li style="margin-bottom: 10px;">Первый урок проходит онлайн с преподавателем — он на связи всё занятие. Ученик занимается, а родители видят, как он становится увереннее.</li>
+                <li style="margin-bottom: 10px;">Дальше — как пожелаете: продолжить с преподавателем онлайн, групповые в учебном классе или перейти на самостоятельные занятия с ИИ-тренером (с отчётами/сводками).</li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h2>Стоимость</h2>
+            <div class="pricing">
+                <div class="price-card">
+                    <h3>С преподавателем онлайн</h3>
+                    <div class="price">30 руб. / занятие</div>
+                    <p>Преподаватель присутствует на занятии всё время, направляет и контролирует процесс.</p>
+                </div>
+                <div class="price-card">
+                    <h3>Самостоятельно с ИИ</h3>
+                    <div class="price">160 руб. разово</div>
+                    <p>Установка на ваше устройство (ноутбук/компьютер) на весь учебный год. Продление — бесплатно. Инструкция прилагается.</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px;">Можно провести 1–2 занятия с преподавателем, посмотреть, как это работает, — а дальше, если решите заниматься без него, перейти на вариант за 160 руб.</p>
+        </div>
+
+        <div class="card">
+            <h2>Важно знать</h2>
+            <ul>
+                <li>Для занятий нужен <strong>свой ноутбук или компьютер</strong>.</li>
+                <li>Ребёнок должен <strong>уметь читать и понимать информацию с экрана</strong>, а также <strong>выражать мысли письменно</strong> — печатая в чате с ИИ. Грамотность не важна: агент поймёт текст даже с ошибками.</li>
+                <li>На русском языке доступны <em>голосовой ввод и озвучивание</em>.</li>
+            </ul>
+        </div>
+
+        <!-- КОНТАКТЫ -->
+        <div class="contacts">
+            <h2>Связаться со мной</h2>
+            <p>Остались вопросы или готовы начать? Напишите мне в Telegram:</p>
+            <!-- ЗАМЕНИТЕ ВАШ_НИК_В_ТЕЛЕГРАММЕ НА ВАШ РЕАЛЬНЫЙ НИК (без @) -->
+            <a href="https://t.me/ВАШ_НИК_В_ТЕЛЕГРАММЕ" class="btn btn-telegram" target="_blank">Написать в Telegram</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
