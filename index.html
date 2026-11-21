@@ -53,75 +53,55 @@
             100% { transform: translateY(0px); }
         }
 
+        /* Анимация глаз */
         .eye-glow {
             animation: blink 3s infinite;
-            transform-origin: center;
+            /* Важно для правильного масштабирования внутри SVG */
+            transform-origin: center; 
+            transform-box: fill-box; 
         }
         @keyframes blink {
             0%, 96%, 98% { transform: scaleY(1); opacity: 1; }
             97% { transform: scaleY(0.1); opacity: 0.5; }
         }
 
-        /* --- КРАСИВАЯ АНИМАЦИЯ РУКИ --- */
+        /* --- ГЛАЗА СТАНОВЯТСЯ БОЛЬШЕ ПРИ ВЗГЛЯДЕ НА ВИДЕО --- */
+        .robot-eyes {
+            transform-origin: 50px 25px; /* Центр между глаз */
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .floating-robot.watching .robot-eyes {
+            transform: scale(1.3); /* Увеличение глаз на 30% */
+        }
+
+        /* --- АНИМАЦИЯ РУКИ --- */
         .arm-left {
-            /* Точка вращения ровно в центре левого плеча */
             transform-origin: 15px 55px; 
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
-        /* Левая рука поднимается вверх и влево (к кнопкам), не отрываясь */
         .floating-robot.pointing .arm-left {
             transform: rotate(100deg) translateY(-5px);
         }
 
         /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
-        .header-profile {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        .header-profile { text-align: center; margin-bottom: 20px; }
         .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #3182ce;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+            border: 4px solid #3182ce; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px;
         }
-        h1 {
-            font-size: 2.2rem;
-            color: #1a202c;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            color: #4a5568;
-        }
+        h1 { font-size: 2.2rem; color: #1a202c; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; color: #4a5568; }
 
         .greeting-box {
-            background: #e6f0fa;
-            border-left: 5px solid #3182ce;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            text-align: center;
+            background: #e6f0fa; border-left: 5px solid #3182ce;
+            padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: center;
         }
-        .greeting-box p {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #2d3748;
-            margin-bottom: 0;
-        }
+        .greeting-box p { font-size: 1.2rem; font-weight: 500; color: #2d3748; margin-bottom: 0; }
 
         h2 {
-            font-size: 1.6rem;
-            color: #2d3748;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 5px;
-            display: flex;
-            align-items: center;
+            font-size: 1.6rem; color: #2d3748; margin-top: 30px; margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;
+            display: flex; align-items: center;
         }
         p { margin-bottom: 15px; font-size: 1.1rem; }
         ul { margin-left: 20px; margin-bottom: 20px; }
@@ -129,72 +109,38 @@
         strong { color: #2b6cb0; }
 
         .card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
+            background: #fff; padding: 30px; border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
         }
 
-        .pricing {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-between;
-        }
+        .pricing { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
         .price-card {
-            flex: 1;
-            min-width: 280px;
-            background: #edf2f7;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 5px solid #3182ce;
+            flex: 1; min-width: 280px; background: #edf2f7; padding: 20px;
+            border-radius: 8px; border-left: 5px solid #3182ce;
         }
         .price-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: #2b6cb0; }
         .price { font-size: 1.6rem; font-weight: bold; color: #2d3748; margin: 10px 0; }
 
         .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-top: 20px;
+            position: relative; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 8px; margin-top: 20px;
         }
         .video-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
 
         .contacts {
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 40px;
-            padding: 20px;
-            border-radius: 12px;
-            transition: background-color 0.5s;
+            text-align: center; margin-top: 40px; margin-bottom: 40px;
+            padding: 20px; border-radius: 12px; transition: background-color 0.5s;
         }
-        .contacts.active {
-            background-color: #e6f0fa;
-            box-shadow: 0 0 15px rgba(49, 130, 206, 0.2);
-        }
+        .contacts.active { background-color: #e6f0fa; box-shadow: 0 0 15px rgba(49, 130, 206, 0.2); }
 
         .btn {
-            display: inline-block;
-            background: #3182ce;
-            color: #fff;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: background 0.3s, transform 0.2s;
-            margin: 10px;
+            display: inline-block; background: #3182ce; color: #fff; padding: 12px 24px;
+            text-decoration: none; border-radius: 30px; font-size: 1.2rem; font-weight: bold;
+            transition: background 0.3s, transform 0.2s; margin: 10px;
         }
-        .btn:hover {
-            background: #2b6cb0;
-            transform: scale(1.05);
-        }
+        .btn:hover { background: #2b6cb0; transform: scale(1.05); }
         .btn-telegram { background: #0088cc; }
         .btn-telegram:hover { background: #006699; }
         .btn-viber { background: #7360f2; }
@@ -213,33 +159,25 @@
 <body>
 
     <!-- Плавающий робот в углу экрана -->
-    <!-- Расширен viewBox, чтобы рука точно не обрезалась -->
     <svg class="floating-robot" id="robot" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg">
-        <!-- Тень -->
         <ellipse cx="50" cy="90" rx="30" ry="5" fill="rgba(0,0,0,0.1)"/>
-        
-        <!-- Тело робота -->
         <rect x="25" y="40" width="50" height="40" rx="10" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
-        
-        <!-- Антенна -->
         <line x1="50" y1="40" x2="50" y2="20" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
         <circle cx="50" cy="20" r="5" fill="#f6e05e" />
-        
-        <!-- Голова -->
         <rect x="15" y="10" width="70" height="30" rx="15" fill="#fff" stroke="#3182ce" stroke-width="3"/>
         
-        <!-- Глаза -->
-        <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
-        <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
+        <!-- Группа глаз (будет увеличиваться) -->
+        <g class="robot-eyes">
+            <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
+            <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
+        </g>
         
-        <!-- Улыбка -->
         <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
         
         <!-- Правая рука (статичная) -->
         <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
         
-        <!-- Левая рука (аккуратная, скругленная) -->
-        <!-- Вращается от плеча (15, 55) -->
+        <!-- Левая рука -->
         <g class="arm-left">
             <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
         </g>
@@ -259,7 +197,7 @@
 
         <div class="card">
             <h2>🤖 Как это работает?</h2>
-            <p>Я занимаюсь со школьниками и студентами в г.Минске по следующим дисциплинам: <strong>математика, химия, физика, информатика</strong>.</p>
+            <p>Я занимаюсь со школьниками и студентами по следующим дисциплинам: <strong>математика, химия, физика, информатика</strong>.</p>
             <p>У меня есть собственная современная методика: занятия проходят с использованием обучающей программы, разработанной с применением технологий <strong>ИИ (искусственного интеллекта)</strong>. Это индивидуальные занятия с гарантией результата — с какого бы уровня ни начинали.</p>
             <p><strong>ИИ-помощник</strong> берёт на себя рутину: объясняет, повторяет, разбирает шаг за шагом — столько раз, сколько нужно. Преподаватель подключается в самые ответственные моменты и направляет, корректирует обучение.</p>
         </div>
@@ -284,7 +222,8 @@
             </ul>
         </div>
 
-        <div class="card">
+        <!-- ДОБАВЛЕН ID="video-section" ДЛЯ ОТСЛЕЖИВАНИЯ СКРОЛЛА -->
+        <div class="card" id="video-section">
             <h2>🎬 Посмотрите, как это работает</h2>
             <p>Вы можете посмотреть демонстрацию работы ИИ-тренера на видео:</p>
             
@@ -352,13 +291,15 @@
 
     </div>
 
-    <!-- Скрипт для анимации руки при скролле -->
+    <!-- СКРИПТЫ ДЛЯ ВЗАИМОДЕЙСТВИЯ -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const contactsSection = document.getElementById("contacts-section");
+            const videoSection = document.getElementById("video-section");
             const floatingRobot = document.getElementById("robot");
 
-            const observer = new IntersectionObserver((entries) => {
+            // Наблюдатель за блоком КОНТАКТОВ (робот поднимает руку)
+            const contactObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         floatingRobot.classList.add("pointing");
@@ -368,11 +309,20 @@
                         contactsSection.classList.remove("active");
                     }
                 });
-            }, {
-                threshold: 0.2
-            });
+            }, { threshold: 0.2 });
+            contactObserver.observe(contactsSection);
 
-            observer.observe(contactsSection);
+            // Наблюдатель за блоком ВИДЕО (робот увеличивает глаза)
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        floatingRobot.classList.add("watching");
+                    } else {
+                        floatingRobot.classList.remove("watching");
+                    }
+                });
+            }, { threshold: 0.5 }); // Срабатывает, когда видео видно наполовину
+            videoObserver.observe(videoSection);
         });
     </script>
 </body>
