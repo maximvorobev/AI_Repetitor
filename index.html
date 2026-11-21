@@ -62,20 +62,15 @@
             97% { transform: scaleY(0.1); opacity: 0.5; }
         }
 
-        /* --- АНИМАЦИЯ РУК --- */
-        .arm-left {
-            transform-origin: 15px 50px; /* Точка вращения левого плеча */
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        /* --- НОВАЯ АНИМАЦИЯ РУКИ (БЕЗ ОТРЫВА) --- */
+        .arm-vector {
+            /* Анимируем линию (руку), которая плавно вытягивается */
+            transition: all 0.5s ease-in-out;
+            transform-origin: 25px 50px;
         }
-        
-        .arm-right {
-            transform-origin: 85px 50px; /* Точка вращения правого плеча */
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        
-        /* Левая рука (ближняя к экрану) поднимается и указывает влево */
-        .floating-robot.pointing .arm-left {
-            transform: rotate(110deg) translate(5px, 5px);
+
+        .floating-robot.pointing .arm-vector {
+            transform: rotate(45deg) translate(5px, -5px);
         }
 
         /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
@@ -238,14 +233,14 @@
         <!-- Улыбка -->
         <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
         
-        <!-- Правая рука (статичная, опущена) -->
+        <!-- Правая рука (статичная) -->
         <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
         
-        <!-- Левая рука (анимированная, ближняя к экрану) -->
-        <g class="arm-left">
-            <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
-            <!-- Указательный палец (смотрит влево, на кнопки) -->
-            <rect x="10" y="72" width="6" height="3" fill="#3182ce" />
+        <!-- Левая рука (новая, в виде вектора) -->
+        <!-- В обычном состоянии она спрятана за телом, при жесте - выдвигается вверх-влево -->
+        <g class="arm-vector">
+            <line x1="25" y1="60" x2="5" y2="40" stroke="#3182ce" stroke-width="10" stroke-linecap="round" />
+            <line x1="25" y1="60" x2="5" y2="40" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" />
         </g>
     </svg>
 
