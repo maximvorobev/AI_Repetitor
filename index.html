@@ -149,11 +149,22 @@
         .btn-telegram:hover {
             background: #006699;
         }
+        /* Стили для кнопки Viber */
+        .btn-viber {
+            background: #7360f2; /* Официальный фиолетовый цвет Viber */
+        }
+        .btn-viber:hover {
+            background: #5a47d6;
+        }
 
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
             h2 { font-size: 1.4rem; }
             .card { padding: 20px; }
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
@@ -245,8 +256,13 @@
         <!-- КОНТАКТЫ -->
         <div class="contacts">
             <h2>📩 Связаться со мной</h2>
-            <p>Остались вопросы или готовы начать? Напишите мне в Telegram:</p>
-            <a href="https://t.me/Vmaxim_rb" class="btn btn-telegram" target="_blank">Написать в Telegram</a>
+            <p>Остались вопросы или готовы начать? Напишите мне в Telegram или Viber:</p>
+            
+            <a href="https://t.me/Vmaxim_rb" class="btn btn-telegram" target="_blank">✈️ Написать в Telegram</a>
+            
+            <!-- Ссылка для Viber. Формат viber://chat?number= использует номер без плюса и пробелов -->
+            <a href="viber://chat?number=%2B375296279010" class="btn btn-viber" target="_blank">📞 Написать в Viber</a>
+            
         </div>
 
     </div>
