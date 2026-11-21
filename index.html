@@ -36,7 +36,6 @@
             z-index: 10;
             pointer-events: none;
             animation: float 4s ease-in-out infinite;
-            transition: transform 0.5s ease;
         }
         
         .inline-robot {
@@ -63,15 +62,23 @@
             97% { transform: scaleY(0.1); opacity: 0.5; }
         }
 
-        /* Анимация руки робота */
-        .robot-arm {
-            transform-origin: 80px 50px; /* Точка вращения руки (плечо) */
+        /* --- АНИМАЦИЯ РУК --- */
+        .arm-left {
+            transform-origin: 15px 50px; /* Точка вращения левого плеча */
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
         
-        /* Класс, который добавляется через JS, когда виден блок контактов */
-        .floating-robot.pointing .robot-arm {
-            transform: rotate(-45deg) translate(10px, -20px);
+        .arm-right {
+            transform-origin: 85px 50px; /* Точка вращения правого плеча */
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* Когда робот указывает, обе руки поднимаются вверх (в сторону кнопок) */
+        .floating-robot.pointing .arm-left {
+            transform: rotate(45deg) translateY(-10px);
+        }
+        .floating-robot.pointing .arm-right {
+            transform: rotate(-45deg) translateY(-10px);
         }
 
         /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
@@ -174,7 +181,6 @@
             border-radius: 12px;
             transition: background-color 0.5s;
         }
-        /* Подсветка блока контактов, когда робот на него указывает */
         .contacts.active {
             background-color: #e6f0fa;
             box-shadow: 0 0 15px rgba(49, 130, 206, 0.2);
@@ -235,14 +241,14 @@
         <!-- Улыбка -->
         <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
         
-        <!-- Левая рука (статичная) -->
-        <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+        <!-- Левая рука (внутри группы для анимации) -->
+        <g class="arm-left">
+            <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+        </g>
         
-        <!-- Правая рука (анимированная) -->
-        <g class="robot-arm" id="arm">
+        <!-- Правая рука (внутри группы для анимации) -->
+        <g class="arm-right">
             <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
-            <!-- Палец/указатель -->
-            <rect x="85" y="45" width="5" height="10" rx="2" fill="#3182ce" />
         </g>
     </svg>
 
@@ -353,27 +359,24 @@
 
     </div>
 
-    <!-- Скрипт, который оживляет робота при скролле -->
+    <!-- Скрипт для анимации рук при скролле -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const contactsSection = document.getElementById("contacts-section");
             const floatingRobot = document.getElementById("robot");
 
-            // Настройка "наблюдателя" за скроллом
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Если блок контактов появился на экране
                         floatingRobot.classList.add("pointing");
                         contactsSection.classList.add("active");
                     } else {
-                        // Если блок контактов ушел с экрана
                         floatingRobot.classList.remove("pointing");
                         contactsSection.classList.remove("active");
                     }
                 });
             }, {
-                threshold: 0.3 // Срабатывает, когда блок виден на 30%
+                threshold: 0.2
             });
 
             observer.observe(contactsSection);
