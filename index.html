@@ -62,15 +62,16 @@
             97% { transform: scaleY(0.1); opacity: 0.5; }
         }
 
-        /* --- НОВАЯ АНИМАЦИЯ РУКИ (БЕЗ ОТРЫВА) --- */
-        .arm-vector {
-            /* Анимируем линию (руку), которая плавно вытягивается */
-            transition: all 0.5s ease-in-out;
-            transform-origin: 25px 50px;
+        /* --- КРАСИВАЯ АНИМАЦИЯ РУКИ --- */
+        .arm-left {
+            /* Точка вращения ровно в центре левого плеча */
+            transform-origin: 15px 55px; 
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-
-        .floating-robot.pointing .arm-vector {
-            transform: rotate(45deg) translate(5px, -5px);
+        
+        /* Левая рука поднимается вверх и влево (к кнопкам), не отрываясь */
+        .floating-robot.pointing .arm-left {
+            transform: rotate(100deg) translateY(-5px);
         }
 
         /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
@@ -212,7 +213,8 @@
 <body>
 
     <!-- Плавающий робот в углу экрана -->
-    <svg class="floating-robot" id="robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Расширен viewBox, чтобы рука точно не обрезалась -->
+    <svg class="floating-robot" id="robot" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg">
         <!-- Тень -->
         <ellipse cx="50" cy="90" rx="30" ry="5" fill="rgba(0,0,0,0.1)"/>
         
@@ -236,11 +238,10 @@
         <!-- Правая рука (статичная) -->
         <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
         
-        <!-- Левая рука (новая, в виде вектора) -->
-        <!-- В обычном состоянии она спрятана за телом, при жесте - выдвигается вверх-влево -->
-        <g class="arm-vector">
-            <line x1="25" y1="60" x2="5" y2="40" stroke="#3182ce" stroke-width="10" stroke-linecap="round" />
-            <line x1="25" y1="60" x2="5" y2="40" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" />
+        <!-- Левая рука (аккуратная, скругленная) -->
+        <!-- Вращается от плеча (15, 55) -->
+        <g class="arm-left">
+            <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
         </g>
     </svg>
 
