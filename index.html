@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Репетитор + ИИ-тренер</title>
+    <title>Репетитор + ИИ-тренер | Максим Евгеньевич</title>
     <style>
         * {
             box-sizing: border-box;
@@ -25,7 +25,7 @@
         /* Блок с фото и заголовком */
         .header-profile {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .profile-pic {
             width: 150px;
@@ -44,6 +44,22 @@
         .subtitle {
             font-size: 1.2rem;
             color: #4a5568;
+        }
+
+        /* Блок приветствия */
+        .greeting-box {
+            background: #e6f0fa; /* Нежный голубой фон */
+            border-left: 5px solid #3182ce;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .greeting-box p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 0;
         }
 
         h2 {
@@ -149,9 +165,8 @@
         .btn-telegram:hover {
             background: #006699;
         }
-        /* Стили для кнопки Viber */
         .btn-viber {
-            background: #7360f2; /* Официальный фиолетовый цвет Viber */
+            background: #7360f2;
         }
         .btn-viber:hover {
             background: #5a47d6;
@@ -165,6 +180,7 @@
                 display: block;
                 margin: 10px 0;
             }
+            .greeting-box p { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -174,9 +190,14 @@
         
         <!-- Шапка с фото -->
         <div class="header-profile">
-            <img src="https://avatars.githubusercontent.com/u/150480328?s=400&u=ac4c7d5ef965a455d35d502df21e8ead640eda11&v=4" alt="Фото преподавателя" class="profile-pic">
+            <img src="https://avatars.githubusercontent.com/u/150480328?s=400&u=ac4c7d5ef965a455d35d502df21e8ead640eda11&v=4" alt="Максим Евгеньевич" class="profile-pic">
             <h1>Репетитор + ИИ-тренер</h1>
             <p class="subtitle">🚀 Гарантированный результат по математике, химии, физике и информатике</p>
+        </div>
+
+        <!-- Блок приветствия -->
+        <div class="greeting-box">
+            <p>👋 Здравствуйте! Меня зовут Максим Евгеньевич. Я помогу вам или вашему ребенку освоить точные науки с помощью современных технологий.</p>
         </div>
 
         <div class="card">
@@ -260,7 +281,7 @@
             
             <a href="https://t.me/Vmaxim_rb" class="btn btn-telegram" target="_blank">✈️ Написать в Telegram</a>
             
-            <!-- Ссылка для Viber. Формат viber://chat?number= использует номер без плюса и пробелов -->
+            <!-- Ссылка для Viber -->
             <a href="viber://chat?number=%2B375296279010" class="btn btn-viber" target="_blank">📞 Написать в Viber</a>
             
         </div>
