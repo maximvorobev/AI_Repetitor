@@ -15,14 +15,56 @@
             line-height: 1.6;
             color: #333;
             background-color: #f4f7f6;
+            position: relative;
+            overflow-x: hidden;
         }
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
+            z-index: 2;
         }
         
-        /* Блок с фото и заголовком */
+        /* --- СТИЛИ ДЛЯ SVG РОБОТОВ --- */
+        .floating-robot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            z-index: 10;
+            pointer-events: none; /* Чтобы робот не мешал кликать по ссылкам */
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .inline-robot {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            margin-left: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Анимация парения */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Анимация моргания/сканирования глаз */
+        .eye-glow {
+            animation: blink 3s infinite;
+            transform-origin: center;
+        }
+        @keyframes blink {
+            0%, 96%, 98% { transform: scaleY(1); opacity: 1; }
+            97% { transform: scaleY(0.1); opacity: 0.5; }
+        }
+
+        /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
         .header-profile {
             text-align: center;
             margin-bottom: 20px;
@@ -46,9 +88,8 @@
             color: #4a5568;
         }
 
-        /* Блок приветствия */
         .greeting-box {
-            background: #e6f0fa; /* Нежный голубой фон */
+            background: #e6f0fa;
             border-left: 5px solid #3182ce;
             padding: 20px;
             border-radius: 8px;
@@ -69,6 +110,8 @@
             margin-bottom: 15px;
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 5px;
+            display: flex;
+            align-items: center;
         }
         p {
             margin-bottom: 15px;
@@ -94,7 +137,6 @@
             margin-bottom: 30px;
         }
 
-        /* Блок с ценами */
         .pricing {
             display: flex;
             flex-wrap: wrap;
@@ -121,7 +163,6 @@
             margin: 10px 0;
         }
 
-        /* Блок для видео */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -172,7 +213,7 @@
             background: #5a47d6;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             h2 { font-size: 1.4rem; }
             .card { padding: 20px; }
@@ -181,10 +222,38 @@
                 margin: 10px 0;
             }
             .greeting-box p { font-size: 1.1rem; }
+            .floating-robot { width: 100px; height: 100px; opacity: 0.8; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Плавающий робот в углу экрана -->
+    <svg class="floating-robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Тень -->
+        <ellipse cx="50" cy="90" rx="30" ry="5" fill="rgba(0,0,0,0.1)"/>
+        
+        <!-- Тело робота -->
+        <rect x="25" y="40" width="50" height="40" rx="10" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+        
+        <!-- Антенна -->
+        <line x1="50" y1="40" x2="50" y2="20" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="20" r="5" fill="#f6e05e" />
+        
+        <!-- Голова -->
+        <rect x="15" y="10" width="70" height="30" rx="15" fill="#fff" stroke="#3182ce" stroke-width="3"/>
+        
+        <!-- Глаза (зрачки сканируют) -->
+        <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
+        <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
+        
+        <!-- Улыбка -->
+        <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
+        
+        <!-- Руки -->
+        <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+        <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+    </svg>
 
     <div class="container">
         
@@ -249,7 +318,18 @@
         </div>
 
         <div class="card">
-            <h2>💰 Стоимость</h2>
+            <h2>💰 Стоимость 
+                <!-- Мини-робот рядом с заголовком -->
+                <svg class="inline-robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="25" y="40" width="50" height="40" rx="10" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+                    <line x1="50" y1="40" x2="50" y2="20" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="20" r="5" fill="#f6e05e" />
+                    <rect x="15" y="10" width="70" height="30" rx="15" fill="#fff" stroke="#3182ce" stroke-width="3"/>
+                    <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
+                    <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
+                    <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </h2>
             <div class="pricing">
                 <div class="price-card">
                     <h3>С преподавателем онлайн</h3>
@@ -280,8 +360,6 @@
             <p>Остались вопросы или готовы начать? Напишите мне в Telegram или Viber:</p>
             
             <a href="https://t.me/Vmaxim_rb" class="btn btn-telegram" target="_blank">✈️ Написать в Telegram</a>
-            
-            <!-- Ссылка для Viber -->
             <a href="viber://chat?number=%2B375296279010" class="btn btn-viber" target="_blank">📞 Написать в Viber</a>
             
         </div>
