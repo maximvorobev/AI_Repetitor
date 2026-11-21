@@ -26,7 +26,7 @@
             z-index: 2;
         }
         
-        /* --- СТИЛИ ДЛЯ SVG РОБОТОВ --- */
+        /* --- СТИЛИ РОБОТОВ --- */
         .floating-robot {
             position: fixed;
             bottom: 20px;
@@ -34,8 +34,9 @@
             width: 150px;
             height: 150px;
             z-index: 10;
-            pointer-events: none; /* Чтобы робот не мешал кликать по ссылкам */
+            pointer-events: none;
             animation: float 4s ease-in-out infinite;
+            transition: transform 0.5s ease;
         }
         
         .inline-robot {
@@ -47,14 +48,12 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        /* Анимация парения */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
 
-        /* Анимация моргания/сканирования глаз */
         .eye-glow {
             animation: blink 3s infinite;
             transform-origin: center;
@@ -62,6 +61,17 @@
         @keyframes blink {
             0%, 96%, 98% { transform: scaleY(1); opacity: 1; }
             97% { transform: scaleY(0.1); opacity: 0.5; }
+        }
+
+        /* Анимация руки робота */
+        .robot-arm {
+            transform-origin: 80px 50px; /* Точка вращения руки (плечо) */
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* Класс, который добавляется через JS, когда виден блок контактов */
+        .floating-robot.pointing .robot-arm {
+            transform: rotate(-45deg) translate(10px, -20px);
         }
 
         /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
@@ -113,21 +123,10 @@
             display: flex;
             align-items: center;
         }
-        p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-        strong {
-            color: #2b6cb0;
-        }
+        p { margin-bottom: 15px; font-size: 1.1rem; }
+        ul { margin-left: 20px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; font-size: 1.1rem; }
+        strong { color: #2b6cb0; }
 
         .card {
             background: #fff;
@@ -151,17 +150,8 @@
             border-radius: 8px;
             border-left: 5px solid #3182ce;
         }
-        .price-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #2b6cb0;
-        }
-        .price {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #2d3748;
-            margin: 10px 0;
-        }
+        .price-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: #2b6cb0; }
+        .price { font-size: 1.6rem; font-weight: bold; color: #2d3748; margin: 10px 0; }
 
         .video-container {
             position: relative;
@@ -173,18 +163,23 @@
         }
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+            top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
 
         .contacts {
             text-align: center;
             margin-top: 40px;
             margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 12px;
+            transition: background-color 0.5s;
         }
+        /* Подсветка блока контактов, когда робот на него указывает */
+        .contacts.active {
+            background-color: #e6f0fa;
+            box-shadow: 0 0 15px rgba(49, 130, 206, 0.2);
+        }
+
         .btn {
             display: inline-block;
             background: #3182ce;
@@ -194,42 +189,32 @@
             border-radius: 30px;
             font-size: 1.2rem;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
             margin: 10px;
         }
         .btn:hover {
             background: #2b6cb0;
+            transform: scale(1.05);
         }
-        .btn-telegram {
-            background: #0088cc;
-        }
-        .btn-telegram:hover {
-            background: #006699;
-        }
-        .btn-viber {
-            background: #7360f2;
-        }
-        .btn-viber:hover {
-            background: #5a47d6;
-        }
+        .btn-telegram { background: #0088cc; }
+        .btn-telegram:hover { background: #006699; }
+        .btn-viber { background: #7360f2; }
+        .btn-viber:hover { background: #5a47d6; }
 
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             h2 { font-size: 1.4rem; }
             .card { padding: 20px; }
-            .btn {
-                display: block;
-                margin: 10px 0;
-            }
+            .btn { display: block; margin: 10px 0; }
             .greeting-box p { font-size: 1.1rem; }
-            .floating-robot { width: 100px; height: 100px; opacity: 0.8; }
+            .floating-robot { width: 100px; height: 100px; opacity: 0.8; bottom: 10px; right: 10px;}
         }
     </style>
 </head>
 <body>
 
     <!-- Плавающий робот в углу экрана -->
-    <svg class="floating-robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <svg class="floating-robot" id="robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <!-- Тень -->
         <ellipse cx="50" cy="90" rx="30" ry="5" fill="rgba(0,0,0,0.1)"/>
         
@@ -243,28 +228,32 @@
         <!-- Голова -->
         <rect x="15" y="10" width="70" height="30" rx="15" fill="#fff" stroke="#3182ce" stroke-width="3"/>
         
-        <!-- Глаза (зрачки сканируют) -->
+        <!-- Глаза -->
         <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
         <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
         
         <!-- Улыбка -->
         <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
         
-        <!-- Руки -->
+        <!-- Левая рука (статичная) -->
         <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
-        <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+        
+        <!-- Правая рука (анимированная) -->
+        <g class="robot-arm" id="arm">
+            <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+            <!-- Палец/указатель -->
+            <rect x="85" y="45" width="5" height="10" rx="2" fill="#3182ce" />
+        </g>
     </svg>
 
     <div class="container">
         
-        <!-- Шапка с фото -->
         <div class="header-profile">
             <img src="https://avatars.githubusercontent.com/u/150480328?s=400&u=ac4c7d5ef965a455d35d502df21e8ead640eda11&v=4" alt="Максим Евгеньевич" class="profile-pic">
             <h1>Репетитор + ИИ-тренер</h1>
             <p class="subtitle">🚀 Гарантированный результат по математике, химии, физике и информатике</p>
         </div>
 
-        <!-- Блок приветствия -->
         <div class="greeting-box">
             <p>👋 Здравствуйте! Меня зовут Максим Евгеньевич. Я помогу вам или вашему ребенку освоить точные науки с помощью современных технологий.</p>
         </div>
@@ -296,7 +285,6 @@
             </ul>
         </div>
 
-        <!-- БЛОК ДЛЯ ВИДЕО -->
         <div class="card">
             <h2>🎬 Посмотрите, как это работает</h2>
             <p>Вы можете посмотреть демонстрацию работы ИИ-тренера на видео:</p>
@@ -319,7 +307,6 @@
 
         <div class="card">
             <h2>💰 Стоимость 
-                <!-- Мини-робот рядом с заголовком -->
                 <svg class="inline-robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <rect x="25" y="40" width="50" height="40" rx="10" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
                     <line x1="50" y1="40" x2="50" y2="20" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
@@ -354,9 +341,9 @@
             </ul>
         </div>
 
-        <!-- КОНТАКТЫ -->
-        <div class="contacts">
-            <h2>📩 Связаться со мной</h2>
+        <!-- КОНТАКТЫ (У этого блока есть id="contacts-section") -->
+        <div class="contacts" id="contacts-section">
+            <h2 style="justify-content: center;">📩 Связаться со мной</h2>
             <p>Остались вопросы или готовы начать? Напишите мне в Telegram или Viber:</p>
             
             <a href="https://t.me/Vmaxim_rb" class="btn btn-telegram" target="_blank">✈️ Написать в Telegram</a>
@@ -366,5 +353,31 @@
 
     </div>
 
+    <!-- Скрипт, который оживляет робота при скролле -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const contactsSection = document.getElementById("contacts-section");
+            const floatingRobot = document.getElementById("robot");
+
+            // Настройка "наблюдателя" за скроллом
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Если блок контактов появился на экране
+                        floatingRobot.classList.add("pointing");
+                        contactsSection.classList.add("active");
+                    } else {
+                        // Если блок контактов ушел с экрана
+                        floatingRobot.classList.remove("pointing");
+                        contactsSection.classList.remove("active");
+                    }
+                });
+            }, {
+                threshold: 0.3 // Срабатывает, когда блок виден на 30%
+            });
+
+            observer.observe(contactsSection);
+        });
+    </script>
 </body>
 </html>
