@@ -16,23 +16,22 @@
             color: #333;
             background-color: #f4f7f6;
             position: relative;
-            overflow-x: hidden; /* Запрещаем горизонтальный скролл */
+            overflow-x: hidden;
         }
         
         /* --- СТИЛИ ДЛЯ МАТЕМАТИЧЕСКОГО СНЕГА --- */
         .math-snowflake {
             position: fixed;
             top: -50px;
-            color: #3182ce; /* Синий цвет в тон дизайну */
-            opacity: 0.15; /* Полупрозрачные, чтобы не мешать чтению */
-            pointer-events: none; /* Клики проходят сквозь них */
-            z-index: 0; /* Позади всего контента */
-            font-family: 'Times New Roman', serif; /* Математический шрифт */
+            color: #3182ce;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            font-family: 'Times New Roman', serif;
             font-weight: bold;
             animation: fall linear infinite;
             user-select: none;
         }
-
         @keyframes fall {
             0% { transform: translateY(-50px) rotate(0deg); }
             100% { transform: translateY(105vh) rotate(360deg); }
@@ -43,7 +42,7 @@
             margin: 0 auto;
             padding: 40px 20px;
             position: relative;
-            z-index: 2; /* Контент поверх снега */
+            z-index: 2;
         }
         
         /* --- СТИЛИ РОБОТОВ --- */
@@ -73,7 +72,6 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Анимация глаз */
         .eye-glow {
             animation: blink 3s infinite;
             transform-origin: center; 
@@ -84,7 +82,6 @@
             97% { transform: scaleY(0.1); opacity: 0.5; }
         }
 
-        /* Глаза больше при взгляде на видео */
         .robot-eyes {
             transform-origin: 50px 25px;
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -93,13 +90,22 @@
             transform: scale(1.3);
         }
 
-        /* Анимация руки */
         .arm-left {
             transform-origin: 15px 55px; 
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .floating-robot.pointing .arm-left {
             transform: rotate(100deg) translateY(-5px);
+        }
+
+        /* Стиль текста на груди робота */
+        .chest-counter {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            font-weight: bold;
+            fill: #e53e3e; /* Красный цвет, как на табло */
+            text-anchor: middle;
+            dominant-baseline: middle;
         }
 
         /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
@@ -130,7 +136,7 @@
         strong { color: #2b6cb0; }
 
         .card {
-            background: rgba(255, 255, 255, 0.95); /* Чуть прозрачный фон, чтобы снег было видно */
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px; border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
             position: relative; z-index: 2;
@@ -182,21 +188,36 @@
 </head>
 <body>
 
-    <!-- Контейнер для математического снега будет генерироваться через JS -->
-
     <!-- Плавающий робот в углу экрана -->
     <svg class="floating-robot" id="robot" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="50" cy="90" rx="30" ry="5" fill="rgba(0,0,0,0.1)"/>
+        
+        <!-- Тело робота -->
         <rect x="25" y="40" width="50" height="40" rx="10" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+        
+        <!-- Экранчик со счетчиком на груди -->
+        <rect x="30" y="50" width="40" height="20" rx="3" fill="#2d3748" />
+        <text id="visit-counter" x="50" y="61" class="chest-counter">...</text>
+        
+        <!-- Антенна -->
         <line x1="50" y1="40" x2="50" y2="20" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
         <circle cx="50" cy="20" r="5" fill="#f6e05e" />
+        
+        <!-- Голова -->
         <rect x="15" y="10" width="70" height="30" rx="15" fill="#fff" stroke="#3182ce" stroke-width="3"/>
+        
+        <!-- Группа глаз -->
         <g class="robot-eyes">
             <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
             <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
         </g>
+        
         <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
+        
+        <!-- Правая рука (статичная) -->
         <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
+        
+        <!-- Левая рука -->
         <g class="arm-left">
             <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
         </g>
@@ -310,7 +331,29 @@
     <!-- СКРИПТЫ -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // --- 1. ЛОГИКА ДЛЯ РОБОТА ---
+            
+            // --- 1. СЧЕТЧИК ПОСЕЩЕНИЙ (Рабочая замена) ---
+            // Ключ оставил ваш, чтобы счетчик не путался с чужими
+            const uniqueKey = 'maxim_repetitor_site_v1'; 
+            const counterDisplay = document.getElementById('visit-counter');
+
+            // Используем новый адрес API
+            fetch('https://countapi.mileshilliard.com/api/v1/hit/' + uniqueKey)
+                .then(response => {
+                    if(!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    // Выводим число на экран робота
+                    counterDisplay.textContent = data.value;
+                })
+                .catch(error => {
+                    console.error('Ошибка счетчика:', error);
+                    // Если не удалось загрузить, показываем прочерк
+                    counterDisplay.textContent = '---';
+                });
+
+            // --- 2. ЛОГИКА ДЛЯ РОБОТА ---
             const contactsSection = document.getElementById("contacts-section");
             const videoSection = document.getElementById("video-section");
             const floatingRobot = document.getElementById("robot");
@@ -339,31 +382,19 @@
             }, { threshold: 0.5 });
             videoObserver.observe(videoSection);
 
-            // --- 2. ГЕНЕРАТОР МАТЕМАТИЧЕСКОГО СНЕГА ---
+            // --- 3. ГЕНЕРАТОР МАТЕМАТИЧЕСКОГО СНЕГА ---
             const mathSymbols = ['π', '∑', '√', '∞', '∫', 'f(x)', 'Δ', 'α', 'β', 'θ', 'λ', '≈', '≠', '±', '×', '÷', '∂', 'Ω'];
-            const snowflakesCount = 35; // Количество символов на экране (можно увеличить)
+            const snowflakesCount = 35;
 
             for (let i = 0; i < snowflakesCount; i++) {
                 const flake = document.createElement('div');
                 flake.className = 'math-snowflake';
-                
-                // Случайный символ
                 flake.innerText = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
-                
-                // Случайная позиция по горизонтали (от 0 до 100% ширины экрана)
                 flake.style.left = Math.random() * 100 + 'vw';
-                
-                // Случайный размер шрифта (от 15px до 40px)
                 flake.style.fontSize = (Math.random() * 25 + 15) + 'px';
-                
-                // Случайная скорость падения (от 10 до 25 секунд)
                 const duration = Math.random() * 15 + 10;
                 flake.style.animationDuration = duration + 's';
-                
-                // Случайная задержка (чтобы они падали не одновременно, а разрозненно)
-                // Отрицательная задержка заставляет их начать падение "с середины"
                 flake.style.animationDelay = (Math.random() * -duration) + 's';
-                
                 document.body.appendChild(flake);
             }
         });
