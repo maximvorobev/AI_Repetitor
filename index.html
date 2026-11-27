@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Репетитор + ИИ-тренер | Максим Евгеньевич</title>
+    <meta name="description" content="Репетитор + ИИ-тренер по математике, химии, физике и информатике. Индивидуальные занятия с гарантией результата. Максим Евгеньевич.">
+    <meta property="og:title" content="Репетитор + ИИ-тренер | Максим Евгеньевич">
+    <meta property="og:description" content="Репетитор + ИИ-тренер по математике, химии, физике и информатике. Индивидуальные занятия с гарантией результата.">
+    <meta property="og:type" content="website">
+    <!-- При публикации добавьте сюда реальный URL: <meta property="og:url" content="https://..."> -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -18,8 +20,8 @@
             position: relative;
             overflow-x: hidden;
         }
-        
-        /* --- СТИЛИ ДЛЯ МАТЕМАТИЧЕСКОГО СНЕГА --- */
+
+        /* --- МАТЕМАТИЧЕСКИЙ СНЕГ --- */
         .math-snowflake {
             position: fixed;
             top: -50px;
@@ -44,8 +46,57 @@
             position: relative;
             z-index: 2;
         }
-        
-        /* --- СТИЛИ РОБОТОВ --- */
+
+        /* --- ПЛАШКА «ПОДЕЛИТЬСЯ» --- */
+        .share-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+        .share-bar__label {
+            font-size: 0.95rem;
+            color: #4a5568;
+            font-weight: 600;
+        }
+        .share-bar__buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .share-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        .share-btn svg { width: 18px; height: 18px; display: block; }
+        .share-btn:hover { transform: translateY(-2px) scale(1.08); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .share-btn:focus-visible { outline: 3px solid #2b6cb0; outline-offset: 2px; }
+        .share-btn--tg    { background: #0088cc; }
+        .share-btn--viber { background: #7360f2; }
+        .share-btn--wa    { background: #25D366; }
+        .share-btn--x     { background: #000000; }
+        .share-btn--vk    { background: #0077FF; }
+        .share-btn--fb    { background: #1877F2; }
+
+        /* --- РОБОТЫ --- */
         .floating-robot {
             position: fixed;
             bottom: 20px;
@@ -56,7 +107,6 @@
             pointer-events: none;
             animation: float 4s ease-in-out infinite;
         }
-        
         .inline-robot {
             display: inline-block;
             width: 40px;
@@ -65,49 +115,27 @@
             margin-left: 10px;
             animation: float 3s ease-in-out infinite;
         }
-
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
-
-        .eye-glow {
-            animation: blink 3s infinite;
-            transform-origin: center; 
-            transform-box: fill-box; 
-        }
+        .eye-glow { animation: blink 3s infinite; transform-origin: center; transform-box: fill-box; }
         @keyframes blink {
             0%, 96%, 98% { transform: scaleY(1); opacity: 1; }
             97% { transform: scaleY(0.1); opacity: 0.5; }
         }
-
-        .robot-eyes {
-            transform-origin: 50px 25px;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .floating-robot.watching .robot-eyes {
-            transform: scale(1.3);
-        }
-
-        .arm-left {
-            transform-origin: 15px 55px; 
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .floating-robot.pointing .arm-left {
-            transform: rotate(100deg) translateY(-5px);
-        }
-
+        .robot-eyes { transform-origin: 50px 25px; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .floating-robot.watching .robot-eyes { transform: scale(1.3); }
+        .arm-left { transform-origin: 15px 55px; transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .floating-robot.pointing .arm-left { transform: rotate(100deg) translateY(-5px); }
         .chest-counter {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 12px;
-            font-weight: bold;
-            fill: #e53e3e;
-            text-anchor: middle;
-            dominant-baseline: middle;
+            font-size: 12px; font-weight: bold; fill: #e53e3e;
+            text-anchor: middle; dominant-baseline: middle;
         }
 
-        /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
+        /* --- КОНТЕНТ --- */
         .header-profile { text-align: center; margin-bottom: 20px; }
         .profile-pic {
             width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
@@ -116,14 +144,12 @@
         }
         h1 { font-size: 2.2rem; color: #1a202c; margin-bottom: 10px; }
         .subtitle { font-size: 1.2rem; color: #4a5568; }
-
         .greeting-box {
             background: #e6f0fa; border-left: 5px solid #3182ce;
             padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: center;
             position: relative; z-index: 2;
         }
         .greeting-box p { font-size: 1.2rem; font-weight: 500; color: #2d3748; margin-bottom: 0; }
-
         h2 {
             font-size: 1.6rem; color: #2d3748; margin-top: 30px; margin-bottom: 15px;
             border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;
@@ -133,44 +159,38 @@
         ul { margin-left: 20px; margin-bottom: 20px; }
         li { margin-bottom: 10px; font-size: 1.1rem; }
         strong { color: #2b6cb0; }
-
         .card {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px; border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
             position: relative; z-index: 2;
         }
-
-        .pricing { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
+        .pricing { display: flex; flex-wrap: wrap; gap: 20px; }
         .price-card {
-            flex: 1; min-width: 280px; background: #edf2f7; padding: 20px;
+            flex: 1 1 280px; min-width: 0;
+            background: #edf2f7; padding: 20px;
             border-radius: 8px; border-left: 5px solid #3182ce;
         }
         .price-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: #2b6cb0; }
         .price { font-size: 1.4rem; font-weight: bold; color: #2d3748; margin: 10px 0; }
-        .price span { font-size: 1rem; color: #718096; font-weight: normal; }
-
-        .video-container {
-            position: relative; padding-bottom: 56.25%; height: 0;
-            overflow: hidden; border-radius: 8px; margin-top: 20px;
-        }
-        .video-container iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
-        }
-
+        .price span { font-size: 1rem; color: #4a5568; font-weight: normal; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-top: 20px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-note { margin-top: 15px; font-size: 0.9rem; color: #4a5568; }
         .contacts {
             text-align: center; margin-top: 40px; margin-bottom: 40px;
             padding: 20px; border-radius: 12px; transition: background-color 0.5s;
             position: relative; z-index: 2;
         }
         .contacts.active { background-color: #e6f0fa; box-shadow: 0 0 15px rgba(49, 130, 206, 0.2); }
-
+        .contacts h2 { justify-content: center; }
         .btn {
             display: inline-block; background: #3182ce; color: #fff; padding: 12px 24px;
             text-decoration: none; border-radius: 30px; font-size: 1.2rem; font-weight: bold;
             transition: background 0.3s, transform 0.2s; margin: 10px;
         }
         .btn:hover { background: #2b6cb0; transform: scale(1.05); }
+        .btn:focus-visible { outline: 3px solid #2b6cb0; outline-offset: 2px; }
         .btn-telegram { background: #0088cc; }
         .btn-telegram:hover { background: #006699; }
         .btn-viber { background: #7360f2; }
@@ -182,67 +202,98 @@
             .card { padding: 20px; }
             .btn { display: block; margin: 10px 0; }
             .greeting-box p { font-size: 1.1rem; }
-            .floating-robot { width: 100px; height: 100px; opacity: 0.8; bottom: 10px; right: 10px;}
+            .floating-robot { width: 100px; height: 100px; opacity: 0.8; bottom: 10px; right: 10px; }
+            .share-btn { width: 34px; height: 34px; }
+            .share-btn svg { width: 16px; height: 16px; }
+            .share-bar { padding: 10px 12px; gap: 8px 10px; }
+        }
+
+        /* Уважение к настройкам ОС: без анимаций */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .math-snowflake { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Плавающий робот в углу экрана -->
-    <svg class="floating-robot" id="robot" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg">
+    <!-- Плавающий робот (декоративный) -->
+    <svg class="floating-robot" id="robot" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true" focusable="false">
         <ellipse cx="50" cy="90" rx="30" ry="5" fill="rgba(0,0,0,0.1)"/>
-        
-        <!-- Тело робота -->
         <rect x="25" y="40" width="50" height="40" rx="10" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
-        
-        <!-- Экранчик со счетчиком на груди -->
         <rect x="30" y="50" width="40" height="20" rx="3" fill="#2d3748" />
         <text id="visit-counter" x="50" y="61" class="chest-counter">...</text>
-        
-        <!-- Антенна -->
         <line x1="50" y1="40" x2="50" y2="20" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
         <circle cx="50" cy="20" r="5" fill="#f6e05e" />
-        
-        <!-- Голова -->
         <rect x="15" y="10" width="70" height="30" rx="15" fill="#fff" stroke="#3182ce" stroke-width="3"/>
-        
-        <!-- Группа глаз -->
         <g class="robot-eyes">
             <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
             <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
         </g>
-        
         <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
-        
-        <!-- Правая рука (статичная) -->
         <rect x="80" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
-        
-        <!-- Левая рука -->
         <g class="arm-left">
             <rect x="10" y="50" width="10" height="25" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
         </g>
     </svg>
 
-    <div class="container">
-        
-        <div class="header-profile">
-            <img src="https://avatars.githubusercontent.com/u/150480328?s=400&u=ac4c7d5ef965a455d35d502df21e8ead640eda11&v=4" alt="Максим Евгеньевич" class="profile-pic">
+    <main class="container">
+
+        <!-- ПЛАШКА «ПОДЕЛИТЬСЯ» -->
+        <div class="share-bar" role="region" aria-label="Поделиться страницей">
+            <span class="share-bar__label">Поделиться:</span>
+            <div class="share-bar__buttons">
+                <button type="button" class="share-btn share-btn--tg" data-share="telegram"
+                        aria-label="Поделиться в Telegram" title="Telegram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+                </button>
+                <button type="button" class="share-btn share-btn--viber" data-share="viber"
+                        aria-label="Поделиться в Viber" title="Viber">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.4 0C9.473.028 5.333.344 3.02 2.467 1.302 4.187.696 6.7.633 9.817c-.06 3.11-.13 8.945 5.48 10.54v2.35c0 .4.487.598.77.315l2.62-2.61c1.43.1 2.58.1 3.06.1 2.13.03 6.03-.28 7.96-2.47 1.72-1.72 2.32-4.23 2.39-7.35.06-3.11.13-8.93-5.48-10.53C15.25.044 13.3-.02 11.4 0z"/></svg>
+                </button>
+                <button type="button" class="share-btn share-btn--wa" data-share="whatsapp"
+                        aria-label="Поделиться в WhatsApp" title="WhatsApp">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </button>
+                <button type="button" class="share-btn share-btn--x" data-share="x"
+                        aria-label="Поделиться в X" title="X">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </button>
+                <button type="button" class="share-btn share-btn--vk" data-share="vk"
+                        aria-label="Поделиться во ВКонтакте" title="ВКонтакте">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.785 16.241s.288-.032.436-.19c.136-.145.132-.417.132-.417s-.02-1.273.572-1.461c.583-.185 1.33 1.229 2.122 1.773.6.41 1.055.32 1.055.32l2.12-.03s1.11-.068.583-.943c-.043-.07-.305-.641-1.57-1.816-1.323-1.232-1.145-1.032.448-3.162.97-1.3 1.358-2.092 1.237-2.432-.115-.324-.827-.238-.827-.238l-2.387.015s-.177-.024-.308.054c-.128.076-.21.254-.21.254s-.379 1.007-.883 1.864c-1.064 1.81-1.49 1.906-1.664 1.794-.405-.262-.304-1.052-.304-1.614 0-1.754.266-2.485-.518-2.674-.26-.063-.451-.104-1.115-.111-.852-.009-1.573.003-1.981.203-.272.133-.482.43-.354.447.158.021.516.097.706.356.245.335.236 1.086.236 1.086s.141 2.065-.329 2.322c-.322.176-.765-.183-1.715-1.826-.487-.841-.854-1.77-.854-1.77s-.071-.173-.197-.266c-.153-.113-.367-.149-.367-.149l-2.268.015s-.34.01-.465.158c-.111.131-.009.401-.009.401s1.778 4.16 3.79 6.256c1.846 1.922 3.943 1.796 3.943 1.796h.951z"/></svg>
+                </button>
+                <button type="button" class="share-btn share-btn--fb" data-share="facebook"
+                        aria-label="Поделиться в Facebook" title="Facebook">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <header class="header-profile">
+            <img src="https://avatars.githubusercontent.com/u/150480328?s=400&u=ac4c7d5ef965a455d35d502df21e8ead640eda11&v=4"
+                 alt="Максим Евгеньевич" class="profile-pic" decoding="async" width="150" height="150">
             <h1>Репетитор + ИИ-тренер</h1>
             <p class="subtitle">🚀 Гарантированный результат по математике, химии, физике и информатике</p>
-        </div>
+        </header>
 
         <div class="greeting-box">
             <p>👋 Здравствуйте! Меня зовут Максим Евгеньевич. Я помогу вам или вашему ребенку освоить точные науки с помощью современных технологий. Наш ИИ-тренер не только объясняет текст, но и <strong>строит графики, чертежи и схемы</strong> прямо в диалоге — это делает обучение наглядным и понятным!</p>
         </div>
 
-        <div class="card">
+        <section class="card">
             <h2>🤖 Как это работает?</h2>
             <p>Я занимаюсь со школьниками и студентами по следующим дисциплинам: <strong>математика, химия, физика, информатика</strong>.</p>
             <p>У меня есть собственная современная методика: занятия проходят с использованием обучающей программы, разработанной с применением технологий <strong>ИИ (искусственного интеллекта)</strong>. Это индивидуальные занятия с гарантией результата — с какого бы уровня ни начинали.</p>
             <p><strong>ИИ-помощник</strong> берёт на себя рутину: объясняет, повторяет, разбирает шаг за шагом — столько раз, сколько нужно. Преподаватель подключается в самые ответственные моменты и направляет, корректирует обучение.</p>
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="card">
             <h2>🏆 Почему результат гарантирован?</h2>
             <ul>
                 <li><strong>Безграничное терпение.</strong> 🧘‍♂️ ИИ-агент не устаёт и не раздражается от повторных вопросов. Одну и ту же тему он объяснит десятки раз — разными словами. В диалоге создаётся ощущение, что ты беседуешь с живым человеком.</li>
@@ -250,9 +301,9 @@
                 <li><strong>Учит думать, а не списывать.</strong> 🧠 Агент не даёт готовый ответ — он разбирает ход решения и следит, чтобы ученик дошёл до него сам, с учётом его особенностей.</li>
                 <li><strong>Гибкий график.</strong> ⏰ ИИ-тренер доступен круглосуточно: заниматься можно, когда есть вдохновение или срочно нужна помощь. На старте с учеником занимается Преподаватель онлайн/оффлайн — направляет и контролирует процесс. Дальше формат выбираете вы.</li>
             </ul>
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="card">
             <h2>🧠 Что умеет агент?</h2>
             <ul>
                 <li>📖 Объясняет темы по химии, физике, информатике и другим предметам простым и понятным языком.</li>
@@ -261,19 +312,23 @@
                 <li>🎓 Готовит к контрольным и экзаменам (ЦТ/ЦЭ): повторение, тренировочные вопросы, разбор ошибок.</li>
                 <li>📋 <strong>В конце каждого занятия</strong> — подробный отчёт: результаты урока, пробелы, которые нужно подтянуть, и выставленная оценка.</li>
             </ul>
-        </div>
+        </section>
 
-        <div class="card" id="video-section">
+        <section class="card" id="video-section">
             <h2>🎬 Посмотрите, как это работает</h2>
             <p>Вы можете посмотреть демонстрацию работы ИИ-тренера на видео:</p>
-            
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/2u57ZPB8OE8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/2u57ZPB8OE8"
+                        title="Демонстрация работы ИИ-тренера"
+                        loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
             </div>
-            <p style="margin-top: 15px; font-size: 0.9rem; color: #718096;">* Если видео не отображается, вы можете найти его на Куфаре по запросу: «Репетитор + (ИИ-тренер)».</p>
-        </div>
+            <p class="video-note">* Если видео не отображается, вы можете найти его на Куфаре по запросу: «Репетитор + (ИИ-тренер)».</p>
+        </section>
 
-        <div class="card">
+        <section class="card">
             <h2>🚀 Как начать?</h2>
             <ol style="margin-left: 20px; margin-bottom: 20px; font-size: 1.1rem;">
                 <li style="margin-bottom: 10px;">📞 Вы связываетесь со мной — обсуждаем класс, предметы и цели.</li>
@@ -281,12 +336,12 @@
                 <li style="margin-bottom: 10px;">👨‍🏫 Первый урок проходит онлайн с преподавателем — он на связи всё занятие. Ученик занимается, а родители видят, как он становится увереннее.</li>
                 <li style="margin-bottom: 10px;">🔄 Дальше — как пожелаете: продолжить с преподавателем онлайн, групповые в учебном классе или перейти на самостоятельные занятия с ИИ-тренером (с отчётами/сводками).</li>
             </ol>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2>💰 Стоимость 
-                <!-- Маленький робот с добавленными ручками -->
-                <svg class="inline-robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <section class="card">
+            <h2>💰 Стоимость
+                <svg class="inline-robot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true" focusable="false">
                     <rect x="25" y="40" width="50" height="40" rx="10" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
                     <line x1="50" y1="40" x2="50" y2="20" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
                     <circle cx="50" cy="20" r="5" fill="#f6e05e" />
@@ -294,10 +349,7 @@
                     <circle cx="35" cy="25" r="6" fill="#2d3748" class="eye-glow" />
                     <circle cx="65" cy="25" r="6" fill="#2d3748" class="eye-glow" />
                     <path d="M 40 33 Q 50 38 60 33" fill="none" stroke="#3182ce" stroke-width="3" stroke-linecap="round"/>
-                    
-                    <!-- Левая ручка -->
                     <rect x="10" y="50" width="10" height="20" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
-                    <!-- Правая ручка -->
                     <rect x="80" y="50" width="10" height="20" rx="5" fill="#e2e8f0" stroke="#3182ce" stroke-width="3"/>
                 </svg>
             </h2>
@@ -314,92 +366,159 @@
                 </div>
             </div>
             <p style="margin-top: 20px;">Можно провести 1–2 занятия с преподавателем, посмотреть, как это работает, — а дальше, если решите заниматься без него, перейти на вариант за 160 BYN.</p>
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="card">
             <h2>❗ Важно знать</h2>
             <ul>
                 <li>💻 Для занятий нужен <strong>свой ноутбук или компьютер</strong>.</li>
                 <li>👦 Ребёнок должен <strong>уметь читать и понимать информацию с экрана</strong>, а также <strong>выражать мысли письменно</strong> — печатая в чате с ИИ. Грамотность не важна: агент поймёт текст даже с ошибками.</li>
                 <li>🗣️ На русском языке доступны <em>голосовой ввод и озвучивание</em>.</li>
             </ul>
-        </div>
+        </section>
 
-        <div class="contacts" id="contacts-section">
-            <h2 style="justify-content: center;">📩 Связаться со мной</h2>
+        <section class="contacts" id="contacts-section">
+            <h2>📩 Связаться со мной</h2>
             <p>Остались вопросы или готовы начать? Напишите мне в Telegram или Viber:</p>
-            
-            <a href="https://t.me/Vmaxim_rb" class="btn btn-telegram" target="_blank">✈️ Написать в Telegram</a>
-            <a href="viber://chat?number=%2B375296279010" class="btn btn-viber" target="_blank">📞 Написать в Viber</a>
-        </div>
+            <a href="https://t.me/Vmaxim_rb" class="btn btn-telegram" target="_blank" rel="noopener noreferrer">✈️ Написать в Telegram</a>
+            <a href="viber://chat?number=%2B375296279010" class="btn btn-viber">📞 Написать в Viber</a>
+        </section>
 
-    </div>
+    </main>
 
-    <!-- СКРИПТЫ -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            
-            // --- 1. СЧЕТЧИК ПОСЕЩЕНИЙ ---
-            const uniqueKey = 'maxim_repetitor_site_v1'; 
-            const counterDisplay = document.getElementById('visit-counter');
+        document.addEventListener("DOMContentLoaded", function () {
 
-            fetch('https://countapi.mileshilliard.com/api/v1/hit/' + uniqueKey)
-                .then(response => {
-                    if(!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    counterDisplay.textContent = data.value;
-                })
-                .catch(error => {
-                    console.error('Ошибка счетчика:', error);
-                    counterDisplay.textContent = '---';
+            // ================== 1. КНОПКИ «ПОДЕЛИТЬСЯ» ==================
+            (function setupShareButtons() {
+                const shareButtons = document.querySelectorAll('.share-btn[data-share]');
+                if (!shareButtons.length) return;
+
+                shareButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const pageUrl = window.location.href;
+                        const pageTitle = document.title;
+                        const shareText = 'Репетитор + ИИ-тренер по математике, химии, физике и информатике. Гарантированный результат!';
+
+                        const eUrl   = encodeURIComponent(pageUrl);
+                        const eTitle = encodeURIComponent(pageTitle);
+                        const eText  = encodeURIComponent(shareText);
+                        const textUrl = encodeURIComponent(shareText + ' ' + pageUrl);
+
+                        const urls = {
+                            telegram: 'https://t.me/share/url?url=' + eUrl + '&text=' + eText,
+                            viber:    'viber://forward?text=' + textUrl,
+                            whatsapp: 'https://wa.me/?text=' + textUrl,
+                            x:        'https://x.com/intent/tweet?url=' + eUrl + '&text=' + eText,
+                            vk:       'https://vk.com/share.php?url=' + eUrl + '&title=' + eTitle,
+                            facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + eUrl
+                        };
+
+                        const network = btn.dataset.share;
+                        const url = urls[network];
+                        if (!url) return;
+
+                        if (network === 'viber') {
+                            // Кастомная схема: аккуратно триггерим через временный <a>
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.rel = 'noopener noreferrer';
+                            a.style.display = 'none';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        } else {
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                        }
+                    });
                 });
+            })();
 
-            // --- 2. ЛОГИКА ДЛЯ РОБОТА ---
-            const contactsSection = document.getElementById("contacts-section");
-            const videoSection = document.getElementById("video-section");
-            const floatingRobot = document.getElementById("robot");
+            // ================== 2. СЧЁТЧИК ПОСЕЩЕНИЙ ==================
+            (function setupCounter() {
+                const uniqueKey = 'maxim_repetitor_site_v1';
+                const counterDisplay = document.getElementById('visit-counter');
+                if (!counterDisplay) return;
 
-            const contactObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        floatingRobot.classList.add("pointing");
-                        contactsSection.classList.add("active");
-                    } else {
-                        floatingRobot.classList.remove("pointing");
-                        contactsSection.classList.remove("active");
-                    }
-                });
-            }, { threshold: 0.2 });
-            contactObserver.observe(contactsSection);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        floatingRobot.classList.add("watching");
-                    } else {
-                        floatingRobot.classList.remove("watching");
-                    }
-                });
-            }, { threshold: 0.5 });
-            videoObserver.observe(videoSection);
+                fetch('https://countapi.mileshilliard.com/api/v1/hit/' + uniqueKey, { signal: controller.signal })
+                    .then(response => {
+                        clearTimeout(timeoutId);
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && (typeof data.value === 'number' || typeof data.value === 'string')) {
+                            counterDisplay.textContent = data.value;
+                        } else {
+                            counterDisplay.textContent = '---';
+                        }
+                    })
+                    .catch(error => {
+                        clearTimeout(timeoutId);
+                        console.warn('Счётчик недоступен:', error);
+                        counterDisplay.textContent = '---';
+                    });
+            })();
 
-            // --- 3. ГЕНЕРАТОР МАТЕМАТИЧЕСКОГО СНЕГА ---
-            const mathSymbols = ['π', '∑', '√', '∞', '∫', 'f(x)', 'Δ', 'α', 'β', 'θ', 'λ', '≈', '≠', '±', '×', '÷', '∂', 'Ω'];
-            const snowflakesCount = 35;
+            // ================== 3. ЛОГИКА РОБОТА ==================
+            (function setupRobot() {
+                const contactsSection = document.getElementById('contacts-section');
+                const videoSection = document.getElementById('video-section');
+                const floatingRobot = document.getElementById('robot');
+                if (!contactsSection || !videoSection || !floatingRobot) return;
+                if (!('IntersectionObserver' in window)) return;
 
-            for (let i = 0; i < snowflakesCount; i++) {
-                const flake = document.createElement('div');
-                flake.className = 'math-snowflake';
-                flake.innerText = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
-                flake.style.left = Math.random() * 100 + 'vw';
-                flake.style.fontSize = (Math.random() * 25 + 15) + 'px';
-                const duration = Math.random() * 15 + 10;
-                flake.style.animationDuration = duration + 's';
-                flake.style.animationDelay = (Math.random() * -duration) + 's';
-                document.body.appendChild(flake);
-            }
+                const contactObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            floatingRobot.classList.add('pointing');
+                            contactsSection.classList.add('active');
+                        } else {
+                            floatingRobot.classList.remove('pointing');
+                            contactsSection.classList.remove('active');
+                        }
+                    });
+                }, { threshold: 0.2 });
+                contactObserver.observe(contactsSection);
+
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            floatingRobot.classList.add('watching');
+                        } else {
+                            floatingRobot.classList.remove('watching');
+                        }
+                    });
+                }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+                videoObserver.observe(videoSection);
+            })();
+
+            // ================== 4. МАТЕМАТИЧЕСКИЙ СНЕГ ==================
+            (function setupSnow() {
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (prefersReducedMotion) return;
+
+                const mathSymbols = ['π', '∑', '√', '∞', '∫', 'f(x)', 'Δ', 'α', 'β', 'θ', 'λ', '≈', '≠', '±', '×', '÷', '∂', 'Ω'];
+                const isMobile = window.matchMedia('(max-width: 768px)').matches;
+                const snowflakesCount = isMobile ? 18 : 35;
+
+                for (let i = 0; i < snowflakesCount; i++) {
+                    const flake = document.createElement('div');
+                    flake.className = 'math-snowflake';
+                    flake.innerText = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+                    flake.setAttribute('aria-hidden', 'true');
+                    flake.style.left = Math.random() * 100 + 'vw';
+                    flake.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                    const duration = Math.random() * 15 + 10;
+                    flake.style.animationDuration = duration + 's';
+                    flake.style.animationDelay = (Math.random() * -duration) + 's';
+                    document.body.appendChild(flake);
+                }
+            })();
+
         });
     </script>
 </body>
