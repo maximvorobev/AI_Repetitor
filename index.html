@@ -8,7 +8,6 @@
     <meta property="og:title" content="Репетитор + ИИ-тренер | Максим Евгеньевич">
     <meta property="og:description" content="Репетитор + ИИ-тренер по математике, химии, физике и информатике. Индивидуальные занятия с гарантией результата.">
     <meta property="og:type" content="website">
-    <!-- При публикации добавьте сюда реальный URL: <meta property="og:url" content="https://..."> -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -165,6 +164,23 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
             position: relative; z-index: 2;
         }
+
+        /* --- СТИЛИ ДЛЯ ПРИМЕРА ОТЧЕТА --- */
+        .report-preview {
+            background: #ffffff;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            font-size: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        .report-preview h3 { font-size: 1.2rem; color: #1a202c; margin-bottom: 15px; font-weight: bold; }
+        .report-preview p { margin-bottom: 12px; font-size: 1rem; color: #2d3748; }
+        .report-preview ul { margin-bottom: 15px; margin-left: 20px; }
+        .report-preview li { font-size: 1rem; margin-bottom: 6px; }
+        .report-preview strong { color: #1a202c; }
+
         .pricing { display: flex; flex-wrap: wrap; gap: 20px; }
         .price-card {
             flex: 1 1 280px; min-width: 0;
@@ -206,9 +222,9 @@
             .share-btn { width: 34px; height: 34px; }
             .share-btn svg { width: 16px; height: 16px; }
             .share-bar { padding: 10px 12px; gap: 8px 10px; }
+            .report-preview { padding: 15px; }
         }
 
-        /* Уважение к настройкам ОС: без анимаций */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -221,7 +237,6 @@
 </head>
 <body>
 
-    <!-- Плавающий робот (декоративный) -->
     <svg class="floating-robot" id="robot" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg"
          aria-hidden="true" focusable="false">
         <ellipse cx="50" cy="90" rx="30" ry="5" fill="rgba(0,0,0,0.1)"/>
@@ -314,6 +329,28 @@
             </ul>
         </section>
 
+        <section class="card">
+            <h2>📝 Пример отчёта после урока</h2>
+            <p>После каждого занятия такое письмо автоматически отправляется на электронную почту родителям. Вы всегда видите, что прошли, как ученик справился и что задано на дом.</p>
+            
+            <div class="report-preview">
+                <h3>Итоги второго урока</h3>
+                <p><strong>Тема:</strong> термодинамика — теплоёмкость газов, цикл Карно, влажность.</p>
+                <p><strong>Что прошли:</strong></p>
+                <ul>
+                    <li>проверку домашнего задания (задача на ΔU и сравнение изотермы с адиабатой — зачёт);</li>
+                    <li>теплоёмкость газов C_V и C_p, уравнение Майера C_p = C_V + R;</li>
+                    <li>цикл Карно и предельный КПД η = (T₁ – T₂)/T₁;</li>
+                    <li>насыщенный пар и его главное свойство: давление зависит только от температуры;</li>
+                    <li>абсолютная и относительная влажность, точка росы.</li>
+                </ul>
+                <p><strong>Ваши результаты:</strong> ΔU = 400 Дж, Q = 1246,5 Дж при постоянном объёме, КПД 40 %, работа 1000 Дж и Q₂ = 1000 Дж, влажность 60 %. Все задачи — самостоятельно и без ошибок в знаках.</p>
+                <p><strong>Оценка за урок:</strong> 9 (отлично). Единственная заминка — точка росы: сначала «не знаю», но после разбора вы сами сделали верный вывод. Считаю этот эпизод скорее полезным: вы увидели, что новое понятие лучше разбирать на простом примере, чем угадывать.</p>
+                <p><strong>Слабые места:</strong> точка росы (закрыты на уроке, требует закрепления), пауза в середине занятия.</p>
+                <p><strong>Домашнее задание:</strong> повторить формулы C_p = C_V + R, η = (T₁–T₂)/T₁, φ = (ρ/ρ₀)·100 %; задачи: 3 моль нагреть на 100 К при постоянном давлении; машина Карно 800/400 К с Q₁ = 3000 Дж; влажность при 25 °C и φ = 40 %; устно — почему давление насыщенного пара не зависит от объёма.</p>
+            </div>
+        </section>
+
         <section class="card" id="video-section">
             <h2>🎬 Посмотрите, как это работает</h2>
             <p>Вы можете посмотреть демонстрацию работы ИИ-тренера на видео:</p>
@@ -400,9 +437,9 @@
                         const pageTitle = document.title;
                         const shareText = 'Репетитор + ИИ-тренер по математике, химии, физике и информатике. Гарантированный результат!';
 
-                        const eUrl   = encodeURIComponent(pageUrl);
-                        const eTitle = encodeURIComponent(pageTitle);
-                        const eText  = encodeURIComponent(shareText);
+                        const eUrl    = encodeURIComponent(pageUrl);
+                        const eTitle  = encodeURIComponent(pageTitle);
+                        const eText   = encodeURIComponent(shareText);
                         const textUrl = encodeURIComponent(shareText + ' ' + pageUrl);
 
                         const urls = {
@@ -419,7 +456,6 @@
                         if (!url) return;
 
                         if (network === 'viber') {
-                            // Кастомная схема: аккуратно триггерим через временный <a>
                             const a = document.createElement('a');
                             a.href = url;
                             a.rel = 'noopener noreferrer';
